@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://player_lobby_001"]
+[gd_scene format=3 uid="uid://dar356tumpe8g"]
 
-[ext_resource type="Script" path="res://scripts/ui/player_lobby.gd" id="1_lobby_script"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player_lobby_bg.jpg" id="2_lobby_bg"]
+[ext_resource type="Script" uid="uid://dhs0gelkw85bn" path="res://scripts/ui/player_lobby.gd" id="1_lobby_script"]
+[ext_resource type="Texture2D" uid="uid://dui7gjoy3cww3" path="res://scenes/ui/player_lobby_bg.jpg" id="2_wos5l"]
 
-[node name="PlayerLobby" type="Control"]
+[node name="PlayerLobby" type="Control" unique_id=365274506]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,44 +12,53 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_lobby_script")
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="PlayerLobbyBg" type="Sprite2D" parent="." unique_id=1322207423]
+position = Vector2(648, 361.50003)
+scale = Vector2(0.47093025, 0.4902344)
+texture = ExtResource("2_wos5l")
+
+[node name="Background" type="TextureRect" parent="." unique_id=1390835847]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -17.0
+offset_right = 26.0
+offset_bottom = -9.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_lobby_bg")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="TopBar" type="HBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_left = 30.0
-offset_top = 25.0
-offset_right = -30.0
-offset_bottom = 75.0
-grow_horizontal = 2
-
-[node name="BtnBack" type="Button" parent="TopBar"]
-custom_minimum_size = Vector2(140, 45)
-layout_mode = 2
-text = "< KEMBALI"
-
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1311555869]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -120.0
+offset_top = -186.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="BtnStartGame" type="Button" parent="CenterContainer"]
+[node name="BtnStartGame" type="Button" parent="CenterContainer" unique_id=516025964]
 custom_minimum_size = Vector2(320, 65)
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "MULAI PERMAINAN"
+
+[node name="TopBar" type="HBoxContainer" parent="." unique_id=1082983956]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 35.0
+offset_top = 20.0
+offset_right = -1066.0
+offset_bottom = 94.0
+grow_horizontal = 2
+
+[node name="BtnBack" type="Button" parent="TopBar" unique_id=1296675605]
+custom_minimum_size = Vector2(140, 45)
+layout_mode = 2
+text = "< KEMBALI"
