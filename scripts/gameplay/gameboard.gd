@@ -8,9 +8,8 @@ var pause_menu_scene = preload("res://scenes/ui/pause_menu.tscn")
 var victory_screen_scene = preload("res://scenes/ui/victory_screen.tscn")
 var pause_menu_instance = null
 
-# Pengaturan Koordinat Grid Papan (10x10)
-var board_origin = Vector2(340, 630) # Titik awal petak 1 (Kiri Bawah)
-var tile_size = Vector2(60, 58)      # Ukuran per petak
+var board_origin = Vector2(340, 630)
+var tile_size = Vector2(60, 58)
 
 var player_nodes = []
 var is_moving = false
@@ -21,10 +20,10 @@ var snake_ladders_map = {
 }
 
 var player_colors = [
-	Color(0.9, 0.2, 0.2), # Merah
-	Color(0.2, 0.5, 0.9), # Biru
-	Color(0.2, 0.8, 0.2), # Hijau
-	Color(0.9, 0.8, 0.1)  # Kuning
+	Color(0.9, 0.2, 0.2),
+	Color(0.2, 0.5, 0.9),
+	Color(0.2, 0.8, 0.2),
+	Color(0.9, 0.8, 0.1)
 ]
 
 func _ready():
@@ -40,7 +39,6 @@ func spawn_player_tokens():
 		token.color = player_colors[i]
 		token.pivot_offset = Vector2(12, 12)
 		
-		# Set offset kecil agar bidak tidak menumpuk persis di titik sama
 		var offset = Vector2((i % 2) * 14 - 7, (i / 2) * 14 - 7)
 		token.position = get_tile_position(1) + offset - Vector2(12, 12)
 		
@@ -52,7 +50,6 @@ func get_tile_position(tile_num: int) -> Vector2:
 	var row = index / 10
 	var col = index % 10
 	
-	# Baris ganjil berarah balik (Zig-zag 1-10 kiri->kanan, 11-20 kanan->kiri)
 	if row % 2 == 1:
 		col = 9 - col
 		
@@ -70,6 +67,7 @@ func _on_roll_dice_pressed():
 		
 	is_moving = true
 	dice_button.disabled = true
+	AudioManager.play_dice()
 	
 	var dice_value = randi_range(1, 6)
 	print("Dadu keluar angka: ", dice_value)
@@ -88,7 +86,6 @@ func move_current_player_animated(steps: int):
 	if target_pos > 100:
 		target_pos = start_pos
 	
-	# Animasi melompat petak demi petak
 	for step in range(start_pos + 1, target_pos + 1):
 		player["position"] = step
 		var target_coord = get_tile_position(step) + Vector2((current_idx % 2) * 14 - 7, (current_idx / 2) * 14 - 7) - Vector2(12, 12)
@@ -97,9 +94,13 @@ func move_current_player_animated(steps: int):
 		tween.tween_property(token_node, "position", target_coord, 0.25).set_trans(Tween.TRANS_SINE)
 		await tween.finished
 	
-	# Cek perosotan Ular / tangga
 	if snake_ladders_map.has(target_pos):
 		var destination = snake_ladders_map[target_pos]
+		if destination > target_pos:
+			AudioManager.play_ladder()
+		else:
+			AudioManager.play_snake()
+			
 		player["position"] = destination
 		var dest_coord = get_tile_position(destination) + Vector2((current_idx % 2) * 14 - 7, (current_idx / 2) * 14 - 7) - Vector2(12, 12)
 		
@@ -117,6 +118,7 @@ func next_turn():
 	update_turn_ui()
 
 func _on_pause_pressed():
+	AudioManager.play_click()
 	if pause_menu_instance == null:
 		pause_menu_instance = pause_menu_scene.instantiate()
 		add_child(pause_menu_instance)
