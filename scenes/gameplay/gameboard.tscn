@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://gameboard_001"]
+
+[ext_resource type="Script" path="res://scripts/gameplay/gameboard.gd" id="1_board_script"]
+
+[node name="Gameboard" type="Node2D"]
+script = ExtResource("1_board_script")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="TurnLabel" type="Label" parent="HUD"]
+offset_left = 30.0
+offset_top = 20.0
+offset_right = 300.0
+offset_bottom = 60.0
+theme_override_font_sizes/font_size = 24
+text = "GILIRAN: PEMAIN 1"
+
+[node name="BtnPause" type="Button" parent="HUD"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -120.0
+offset_top = 20.0
+offset_right = -30.0
+offset_bottom = 60.0
+grow_horizontal = 0
+text = "|| PAUSE"
+
+[node name="BtnRollDice" type="Button" parent="HUD"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -90.0
+offset_right = 100.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 20
+text = "LEMPAR DADU"
