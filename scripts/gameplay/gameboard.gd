@@ -69,10 +69,23 @@ func _on_roll_dice_pressed():
 	dice_button.disabled = true
 	AudioManager.play_dice()
 	
-	var dice_value = randi_range(1, 6)
-	print("Dadu keluar angka: ", dice_value)
-	await move_current_player_animated(dice_value)
+	# Animasi acak angka dadu (Roll Effect)
+	var final_dice_value = randi_range(1, 6)
+	var roll_time = 0.6
+	var elapsed = 0.0
 	
+	while elapsed < roll_time:
+		var temp_val = randi_range(1, 6)
+		dice_button.text = "DADU: [" + str(temp_val) + "]"
+		await get_tree().create_timer(0.06).timeout
+		elapsed += 0.06
+		
+	dice_button.text = "DADU: [" + str(final_dice_value) + "]"
+	print("Dadu keluar angka: ", final_dice_value)
+	
+	await move_current_player_animated(final_dice_value)
+	
+	dice_button.text = "LEMPAR DADU"
 	dice_button.disabled = false
 	is_moving = false
 
