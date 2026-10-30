@@ -4,26 +4,14 @@ extends Node2D
 @onready var pause_button = $HUD/BtnPause
 @onready var turn_label = $HUD/TurnLabel
 
-# Pemetaan Petak Tangga (Naik) dan Ular (Turun)
+var pause_menu_scene = preload("res://scenes/ui/pause_menu.tscn")
+var victory_screen_scene = preload("res://scenes/ui/victory_screen.tscn")
+
+var pause_menu_instance = null
+
 var snake_ladders_map = {
-	# Tangga (Pangkal -> Ujung)
-	4: 14,
-	9: 31,
-	20: 38,
-	28: 84,
-	40: 59,
-	51: 67,
-	63: 81,
-	71: 91,
-	# Ular (Kepala -> Ekor)
-	17: 7,
-	54: 34,
-	62: 19,
-	64: 60,
-	87: 24,
-	93: 73,
-	95: 75,
-	99: 78
+	4: 14, 9: 31, 20: 38, 28: 84, 40: 59, 51: 67, 63: 81, 71: 91,
+	17: 7, 54: 34, 62: 19, 64: 60, 87: 24, 93: 73, 95: 75, 99: 78
 }
 
 func _ready():
@@ -45,10 +33,11 @@ func move_current_player(steps: int):
 	var player = GameManager.players_data[current_idx]
 	var new_pos = player["position"] + steps
 	
-	if new_pos > 100:
-		new_pos = player["position"]
-	elif new_pos == 100:
-		print(player["name"] + " MENANG!")
+	if new_pos >= 100:
+		new_pos = 100
+		player["position"] = new_pos
+		show_victory(player["name"])
+		return
 		
 	if snake_ladders_map.has(new_pos):
 		var destination = snake_ladders_map[new_pos]
@@ -68,4 +57,14 @@ func next_turn():
 	update_turn_ui()
 
 func _on_pause_pressed():
-	print("Game Dijeda")
+	if pause_menu_instance == null:
+		pause_menu_instance = pause_menu_scene.instantiate()
+		add_child(pause_menu_instance)
+	else:
+		pause_menu_instance.show()
+	get_tree().paused = true
+
+func show_victory(winner_name: String):
+	var victory_instance = victory_screen_scene.instantiate()
+	add_child(victory_instance)
+	victory_instance.set_winner(winner_name)
