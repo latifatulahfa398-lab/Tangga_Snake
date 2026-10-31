@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://pause_menu_001"]
+[gd_scene format=3 uid="uid://c7cntinjqleqw"]
 
-[ext_resource type="Script" path="res://scripts/ui/pause_menu.gd" id="1_pause_script"]
+[ext_resource type="Script" uid="uid://cw3sjbke8mdii" path="res://scripts/ui/pause_menu.gd" id="1_pause_script"]
 
-[node name="PauseMenu" type="Control"]
+[node name="PauseMenu" type="Control" unique_id=875589462]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_pause_script")
 
-[node name="Overlay" type="ColorRect" parent="."]
+[node name="Overlay" type="ColorRect" parent="." unique_id=1843642925]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,7 +20,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.65)
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=1648254609]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -34,7 +34,7 @@ offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Title" type="Label" parent="Panel"]
+[node name="Title" type="Label" parent="Panel" unique_id=2059655879]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -48,7 +48,7 @@ theme_override_font_sizes/font_size = 22
 text = "PERMAINAN DIJEDA"
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=1568899689]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -63,17 +63,17 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 12
 
-[node name="BtnResume" type="Button" parent="Panel/VBoxContainer"]
+[node name="BtnResume" type="Button" parent="Panel/VBoxContainer" unique_id=1348849431]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 text = "LANJUTKAN"
 
-[node name="BtnSettings" type="Button" parent="Panel/VBoxContainer"]
+[node name="BtnSettings" type="Button" parent="Panel/VBoxContainer" unique_id=743498743]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 text = "PENGATURAN"
 
-[node name="BtnMainMenu" type="Button" parent="Panel/VBoxContainer"]
+[node name="BtnMainMenu" type="Button" parent="Panel/VBoxContainer" unique_id=1076897781]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 text = "KE MENU UTAMA"
