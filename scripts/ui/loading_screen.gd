@@ -20,9 +20,8 @@ func animate_loading():
 	for i in range(tips.size()):
 		var target_val = (i + 1) * 25.0
 		status_label.text = tips[i]
-		tween.tween_property(progress_bar, "value", target_val, 0.6).set_trans(Tween.TRANS_SINE)
-		tween.tween_interval(0.2)
+		tween.tween_property(progress_bar, "value", target_val, 0.5).set_trans(Tween.TRANS_SINE)
+		tween.tween_interval(0.15)
 		
 	await tween.finished
-	
 	get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")
